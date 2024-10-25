@@ -1,0 +1,15 @@
+#2use NER extraction technique
+import spacy
+
+# Load the pre-trained spaCy model for English
+nlp = spacy.load("en_core_web_sm")
+
+# Example text
+text = "Tesla Inc., led by Elon Musk, unveiled its new Model S in Los Angeles on June 22, 2020."
+
+# Apply the NER model to the text
+doc = nlp(text)
+
+# Extract and print the entities
+for ent in doc.ents:
+    print(ent.text, ent.label_)

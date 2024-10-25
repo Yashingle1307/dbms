@@ -1,0 +1,33 @@
+#9 transformer
+# Step 1: Tokenization
+from transformers import AutoTokenizer
+
+# Load a pre-trained tokenizer (e.g., for BERT)
+tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
+
+# Example text to tokenize
+text = "Hello, how are you?"
+
+# Tokenize the text
+tokens = tokenizer.tokenize(text)
+print("Tokens:", tokens)
+
+# Convert tokens to input IDs
+input_ids = tokenizer.encode(text, return_tensors='pt')  # Return as PyTorch tensor
+print("Input IDs:", input_ids)
+
+# Import necessary libraries
+from transformers import pipeline
+
+# Load the translation pipeline
+translator = pipeline("translation_en_to_fr")
+
+# Text to translate
+text_to_translate = "Hello, how are you today?"
+
+# Translate the text
+translated_text = translator(text_to_translate, max_length=40)
+
+# Output the result
+print("Original Text:", text_to_translate)
+print("Translated Text:", translated_text[0]['translation_text'])

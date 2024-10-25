@@ -1,0 +1,20 @@
+#8 sentiment analysis code 
+# Import necessary libraries
+from transformers import pipeline
+
+# Load the sentiment-analysis pipeline
+sentiment_analyzer = pipeline("sentiment-analysis")
+
+# Example texts for sentiment analysis
+texts = [
+    "I love this product! It's amazing.",
+    "This is the worst thing I have ever bought.",
+    "It's okay, nothing special.",
+]
+
+# Analyze sentiment
+results = sentiment_analyzer(texts)
+
+# Output the results
+for text, result in zip(texts, results):
+    print(f"Text: {text}\nSentiment: {result['label']}, Score: {result['score']:.2f}\n")

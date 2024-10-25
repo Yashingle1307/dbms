@@ -1,0 +1,41 @@
+#1 perform all lemma,token,stopword etc
+
+import nltk
+from nltk.tokenize import word_tokenize
+from nltk.corpus import stopwords
+from nltk.stem import PorterStemmer, WordNetLemmatizer
+import string
+
+# Download required NLTK resources
+nltk.download('punkt')
+nltk.download('stopwords')
+nltk.download('wordnet')
+
+# Sample text
+text = "Natural Language Processing (NLP) is an exciting field of study!"
+
+# 1. Tokenization
+tokens = word_tokenize(text)
+print("Tokens:", tokens)
+
+# 2. Punctuation Removal
+tokens = [word for word in tokens if word not in string.punctuation]
+print("Tokens after punctuation removal:", tokens)
+
+# 3. Stop Words Removal
+stop_words = set(stopwords.words('english'))
+tokens = [word for word in tokens if word.lower() not in stop_words]
+print("Tokens after stop words removal:", tokens)
+
+# 4. Stemming
+ps = PorterStemmer()
+stemmed_tokens = [ps.stem(word) for word in tokens]
+print("Stemmed Tokens:", stemmed_tokens)
+
+# 5. Lemmatization
+lemmatizer = WordNetLemmatizer()
+lemmatized_tokens = [lemmatizer.lemmatize(word) for word in tokens]
+print("Lemmatized Tokens:", lemmatized_tokens)
+
+
+

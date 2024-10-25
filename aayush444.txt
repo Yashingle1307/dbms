@@ -1,0 +1,28 @@
+#4 ngram
+import nltk
+from nltk import ngrams
+from nltk.tokenize import word_tokenize
+from collections import Counter
+
+# Download required NLTK resources
+nltk.download('punkt')
+
+# Sample text for N-gram modeling
+text = "Natural language processing is an exciting field. Natural language understanding is a part of NLP."
+
+# Step 1: Tokenization
+# Tokenizing the text into words and converting to lowercase
+tokens = word_tokenize(text.lower())  # Lowercasing for uniformity
+
+# Step 2: Create Bigrams
+# Generating bigrams from the tokenized words
+bigrams = ngrams(tokens, 2)
+
+# Step 3: Count Frequency of Bigrams
+# Using Counter to count occurrences of each bigram
+bigram_freq = Counter(bigrams)
+
+# Step 4: Display Bigrams and their Frequencies
+print("Bigrams and their Frequencies:")
+for bigram, freq in bigram_freq.items():
+    print(f"{bigram}: {freq}")

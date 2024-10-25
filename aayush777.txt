@@ -1,0 +1,15 @@
+#7 translator code
+!pip install deep_translator
+
+
+
+from deep_translator import GoogleTranslator
+
+text = 'Would you like an apple'
+translated_text = GoogleTranslator(source = 'en', target = 'es').translate(text)
+print(translated_text)
+
+
+text = 'this is my nlp practical and I thinks its pretty easy '
+translated = GoogleTranslator(source = 'en', target = 'fr').translate(text)
+print(translated)

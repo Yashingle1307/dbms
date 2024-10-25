@@ -1,0 +1,39 @@
+#5 aspect mining code
+import nltk
+from nltk.sentiment import SentimentIntensityAnalyzer
+import pandas as pd
+
+# Download required NLTK resources
+nltk.download('vader_lexicon')
+
+# Sample reviews data
+reviews = [
+    "The food was amazing but the service was slow.",
+    "I love the ambiance, but the food was overpriced.",
+    "Great service and delicious food!",
+    "The restaurant is beautiful, but the wait was too long."
+]
+
+# Step 1: Define aspects
+aspects = ["food", "service", "ambiance", "wait"]
+
+# Step 2: Initialize Sentiment Analyzer
+sia = SentimentIntensityAnalyzer()
+
+# Step 3: Extract aspects and determine sentiment
+aspect_sentiment = {}
+
+for review in reviews:
+    for aspect in aspects:
+        if aspect in review.lower():
+            sentiment_score = sia.polarity_scores(review)["compound"]
+            sentiment = "positive" if sentiment_score > 0 else "negative" if sentiment_score < 0 else "neutral"
+            if aspect not in aspect_sentiment:
+                aspect_sentiment[aspect] = []
+            aspect_sentiment[aspect].append((review, sentiment))
+
+# Step 4: Display results
+for aspect, sentiments in aspect_sentiment.items():
+    print(f"Aspects: {aspect}")
+    for review, sentiment in sentiments:
+        print(f" - Review: '{review}' | Sentiment: {sentiment}")

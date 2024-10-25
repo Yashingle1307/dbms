@@ -1,0 +1,61 @@
+#6 text summarization classification
+
+!pip install summa
+
+from summa import summarizer
+
+# Sample text for summarization
+text = """
+Natural Language Processing (NLP) is a field of artificial intelligence that focuses on the interaction 
+between computers and humans through natural language. The ultimate goal of NLP is to enable computers to 
+understand, interpret, and generate human language in a valuable way. NLP has a wide range of applications, 
+including text analysis, machine translation, sentiment analysis, and chatbots.
+"""
+
+# Perform extractive summarization
+summary = summarizer.summarize(text, ratio=0.5)  # Summarize to 50% of the original text
+
+# Output the results
+print("Original Text:")
+print(text)
+print("\nSummarized Text:")
+print(summary)
+
+
+
+
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.naive_bayes import MultinomialNB
+from sklearn.pipeline import make_pipeline
+from sklearn.model_selection import train_test_split
+from sklearn import metrics
+
+# Sample dataset for classification
+data = [
+    ("I love programming in Python", "positive"),
+    ("Python is great for data science", "positive"),
+    ("I dislike bugs in the code", "negative"),
+    ("Debugging is frustrating", "negative"),
+    ("The syntax of Python is easy to learn", "positive"),
+    ("I hate when the code doesn't work", "negative"),
+]
+
+# Step 1: Prepare data
+texts, labels = zip(*data)
+
+# Step 2: Split data into training and test sets
+X_train, X_test, y_train, y_test = train_test_split(texts, labels, test_size=0.3, random_state=42)
+
+# Step 3: Create a pipeline with CountVectorizer and Naive Bayes
+model = make_pipeline(CountVectorizer(), MultinomialNB())
+
+# Step 4: Train the model
+model.fit(X_train, y_train)
+
+# Step 5: Predict the labels for the test set
+predicted_labels = model.predict(X_test)
+
+# Step 6: Evaluate the model
+accuracy = metrics.accuracy_score(y_test, predicted_labels)
+print("\nPredicted Labels:", predicted_labels)
+print("Accuracy:", accuracy)
